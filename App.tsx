@@ -1,45 +1,67 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- */
+import { StatusBar, StyleSheet, Text, View } from 'react-native';
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { Ionicons } from '@react-native-vector-icons/ionicons';
+import HomeScreen from './src/screens/HomeScreen';
+import ReorderScreen from './src/screens/ReorderScreen';
+import CartScreen from './src/screens/CartScreen';
+import AccountScreen from './src/screens/AccountScreen';
 
-import { NewAppScreen } from '@react-native/new-app-screen';
-import { StatusBar, StyleSheet, useColorScheme, View } from 'react-native';
-import {
-  SafeAreaProvider,
-  useSafeAreaInsets,
-} from 'react-native-safe-area-context';
 
-function App() {
-  const isDarkMode = useColorScheme() === 'dark';
+const Tab = createBottomTabNavigator();
 
+const App = () => {
   return (
-    <SafeAreaProvider>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <AppContent />
-    </SafeAreaProvider>
-  );
-}
-
-function AppContent() {
-  const safeAreaInsets = useSafeAreaInsets();
-
-  return (
-    <View style={styles.container}>
-      <NewAppScreen
-        templateFileName="App.tsx"
-        safeAreaInsets={safeAreaInsets}
-      />
+    <View style={{ flex: 1 }}>
+      <StatusBar backgroundColor="#ffffff" barStyle="dark-content" />
+      <NavigationContainer>
+        <Tab.Navigator screenOptions={{
+          tabBarActiveTintColor: '#E96E6E',
+          tabBarInactiveTintColor: '#b4b4b9e3',
+          headerShown: false,
+          tabBarStyle: {position: 'absolute', backgroundColor: '#ebf1f7'},
+          tabBarLabelVisibilityMode: 'unlabeled'
+        }}>
+          <Tab.Screen name="HOME" component={HomeScreen} options={{
+            tabBarIcon: ({color, size})=>(
+              <Ionicons name='home-sharp' size={size} color={color}/>
+            )
+          }}/>
+          <Tab.Screen name="REORDER" component={ReorderScreen} options={{
+            tabBarIcon: ({color, size})=>(
+              <Ionicons name='reorder-four-sharp' size={size} color={color}/>
+            )
+          }
+          }/>
+          <Tab.Screen name="CART" component={CartScreen} options={{
+            tabBarIcon: ({size, color})=>(
+              <Ionicons name='cart-sharp' size={size} color={color}/>
+  )
+          }}/>
+          <Tab.Screen name="ACCOUNT" component={AccountScreen} options={{
+           tabBarIcon: ({size, color})=>(
+            <Ionicons name='person' size={size} color={color}/>
+           )
+          }}/>
+        </Tab.Navigator>
+      </NavigationContainer>
     </View>
   );
-}
+};
+
+export default App;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#f5f5f5',
+  },
+  text: {
+    color: 'black',
+    fontSize: 18,
+    fontWeight: 'bold',
   },
 });
-
-export default App;
