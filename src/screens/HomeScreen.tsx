@@ -4,18 +4,37 @@ import LinearGradient from 'react-native-linear-gradient';
 import Header from '../components/Header';
 import Ionicons from '@react-native-vector-icons/ionicons';
 import Category from '../components/Category';
+import ProductCard from '../components/ProductCard';
+import data from '../data/data.json';
 
-const categories = ['Trending Now', 'All', 'New', 'Mens', 'Womens'];
+const categories = ['Trending Now', 'All', 'New', 'Men', 'Women'];
 
 const HomeScreen = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>(
     categories[0],
   );
-  return (
-    <LinearGradient
-      colors={['#fce4e9', '#fceef2', '#ffffff']}
-      style={styles.container}
-    >
+  const [isLiked, setIsLiked] = useState(false);
+
+  // Dynamic filter calculation engine
+  const getFilteredProducts = () => {
+    if (selectedCategory === 'All' || selectedCategory === 'New') {
+      return data.products;
+    }
+    if (selectedCategory === 'Trending Now') {
+      return data.products.filter(p => p.trending === true);
+    }
+    if (selectedCategory === 'Men') {
+      return data.products.filter(p => p.category === 'men');
+    }
+    if (selectedCategory === 'Women') {
+      return data.products.filter(p => p.category === 'women');
+    }
+    return data.products;
+  };
+
+  // Bundling top elements into a single safe layout track
+  const renderHeader = () => (
+    <View>
       <Header />
 
       {/* Search input section */}
@@ -26,17 +45,40 @@ const HomeScreen = () => {
       </View>
 
       {/* Category section */}
+      <View style={styles.categoryListWrapper}>
+        <FlatList
+          data={categories}
+          renderItem={({ item }) => (
+            <Category
+              item={item}
+              selectedCategory={selectedCategory}
+              setSelectedCategory={setSelectedCategory}
+            />
+          )}
+          keyExtractor={item => item}
+          horizontal={true}
+          showsHorizontalScrollIndicator={false}
+        />
+      </View>
+    </View>
+  );
+
+  return (
+    <LinearGradient
+      colors={['#fce4e9', '#fceef2', '#ffffff']}
+      style={styles.container}
+    >
       <FlatList
-        data={categories}
+        data={getFilteredProducts()}
         renderItem={({ item }) => (
-          <Category
-            item={item}
-            selectedCategory={selectedCategory}
-            setSelectedCategory={setSelectedCategory}
-          />
+          <ProductCard item={item} isLiked={isLiked} setIsLiked={setIsLiked} />
         )}
-        keyExtractor={item => item}
-        horizontal={true}
+        keyExtractor={item => item.id.toString()}
+        ListHeaderComponent={renderHeader}
+        numColumns={2} // ✨ Renders 2 items per row
+        columnWrapperStyle={styles.columnWrapper} // ✨ Distributes space evenly between columns
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={styles.listContent}
       />
     </LinearGradient>
   );
@@ -47,7 +89,15 @@ export default HomeScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 20,
+  },
+  listContent: {
+    paddingHorizontal: 16,
+    paddingTop: 10,
+    paddingBottom: 30,
+  },
+  columnWrapper: {
+    justifyContent: 'space-between', // ✨ Pushes columns perfectly to opposite screen edges
+    marginBottom: 16, // Adds uniform vertical spacing between grid rows
   },
   matchText: {
     color: '#000000',
@@ -67,5 +117,10 @@ const styles = StyleSheet.create({
   },
   textInput: {
     flex: 1,
+  },
+  categoryListWrapper: {
+    height: 60,
+    marginTop: 10,
+    marginBottom: 10,
   },
 });

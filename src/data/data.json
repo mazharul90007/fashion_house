@@ -1,0 +1,68 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "image": "https://res.cloudinary.com/dycrowzen/image/upload/v1780425628/women_sari_cfnlmb.jpg",
+      "title": "Cotton Sharee",
+      "category": "women",
+      "trending": true,
+      "price": 200.3
+    },
+    {
+      "id": 2,
+      "image": "https://res.cloudinary.com/dycrowzen/image/upload/v1780425627/women_ethnic_hp0gph.jpg",
+      "title": "One piece",
+      "category": "women",
+      "trending": true,
+      "price": 150.0
+    },
+    {
+      "id": 3,
+      "image": "https://res.cloudinary.com/dycrowzen/image/upload/v1780425627/women_jaket_oleshe.jpg",
+      "title": "Kids Jacket",
+      "category": "kid",
+      "trending": true,
+      "price": 230.5
+    },
+    {
+      "id": 4,
+      "image": "https://res.cloudinary.com/dycrowzen/image/upload/v1780425626/men_jersey_qn0fa2.jpg",
+      "title": "Mens Jersey",
+      "category": "men",
+      "trending": true,
+      "price": 100.5
+    },
+    {
+      "id": 5,
+      "image": "https://res.cloudinary.com/dycrowzen/image/upload/v1780425627/men_panjabi_rliv8d.jpg",
+      "title": "Mens Panjabi",
+      "category": "men",
+      "trending": true,
+      "price": 160.5
+    },
+    {
+      "id": 6,
+      "image": "https://res.cloudinary.com/dycrowzen/image/upload/v1780425627/men_lungi_uxmfzp.jpg",
+      "title": "Mens Lungi",
+      "category": "men",
+      "trending": false,
+      "price": 80.9
+    },
+    {
+      "id": 7,
+      "image": "https://res.cloudinary.com/dycrowzen/image/upload/v1780425626/men_genji_z5ul5v.jpg",
+      "title": "T-shirt",
+      "category": "men",
+      "trending": false,
+      "price": 70.0
+    },
+    {
+      "id": 8,
+      "image": "https://res.cloudinary.com/dycrowzen/image/upload/v1780426292/boys_katua_keayw0.jpg",
+      "title": "Boys Katua",
+      "category": "kid",
+      "trending": true,
+      "price": 70.0
+    }
+  ]
+}
