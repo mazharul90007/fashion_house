@@ -1,5 +1,12 @@
-import { Dimensions, Image, StyleSheet, Text, View } from 'react-native';
-import React from 'react';
+import {
+  Dimensions,
+  Image,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import React, { useState } from 'react';
 import Ionicons from '@react-native-vector-icons/ionicons';
 
 // Calculating safe responsive width boundaries for 2-column grid scaling
@@ -15,11 +22,10 @@ interface ProductCardProps {
     category: string;
     trending: boolean;
   };
-  isLiked: boolean;
-  setIsLiked: (value: boolean) => void;
 }
 
 const ProductCard = ({ item }: ProductCardProps) => {
+  const [isLiked, setIsLiked] = useState(false);
   return (
     <View style={styles.productContainer}>
       <View style={styles.imageContainer}>
@@ -29,9 +35,16 @@ const ProductCard = ({ item }: ProductCardProps) => {
           style={styles.coverImage}
           resizeMode="cover"
         />
-        <View style={styles.imageIconContainer}>
-          <Ionicons name="heart-outline" size={22} color={'#e55b5b'} />
-        </View>
+        <TouchableOpacity
+          style={styles.imageIconContainer}
+          onPress={() => setIsLiked(!isLiked)}
+        >
+          {isLiked ? (
+            <Ionicons name="heart-sharp" size={22} color={'#e55b5b'} />
+          ) : (
+            <Ionicons name="heart-outline" size={22} color={'#e55b5b'} />
+          )}
+        </TouchableOpacity>
       </View>
       <View style={styles.productDescription}>
         <Text style={styles.productTitle} numberOfLines={1}>
