@@ -10,8 +10,22 @@ import AccountScreen from './src/screens/AccountScreen';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import ProductDetailsScreen from './src/screens/ProductDetailsScreen';
 
+export type RootStackParamList = {
+  HOME: undefined;
+  PRODUCT_DETAILS: {
+    product: {
+      id: number;
+      image: string;
+      title: string;
+      price: number;
+      category: string;
+      trending: boolean;
+    };
+  };
+};
+
 const Tab = createBottomTabNavigator();
-const Stack = createNativeStackNavigator();
+const Stack = createNativeStackNavigator<RootStackParamList>();
 
 const MyHomeStack = () => {
   return (

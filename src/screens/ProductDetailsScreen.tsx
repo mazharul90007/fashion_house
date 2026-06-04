@@ -2,15 +2,10 @@ import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import React, { useState } from 'react';
 import LinearGradient from 'react-native-linear-gradient';
 import Header from '../components/Header';
+import { RootStackParamList } from '../../App';
+import { NativeStackScreenProps } from '@react-navigation/native-stack';
 
-interface ProductData {
-  id: number;
-  image: string;
-  title: string;
-  price: number;
-  category: string;
-  trending: boolean;
-}
+type props = NativeStackScreenProps<RootStackParamList, 'PRODUCT_DETAILS'>;
 
 const sizes = ['S', 'M', 'L', 'XL', 'XXL'];
 const colors = [
@@ -22,11 +17,7 @@ const colors = [
   '#000000',
 ];
 
-const ProductDetailsScreen = ({
-  route,
-}: {
-  route: { params?: { product: ProductData } };
-}) => {
+const ProductDetailsScreen = ({ route }: props) => {
   const { product } = route.params || {};
   const [selectedColor, setSelectedColor] = useState<string | null>(null);
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
@@ -37,7 +28,7 @@ const ProductDetailsScreen = ({
       style={styles.container}
     >
       <View style={styles.headerContainer}>
-        <Header />
+        <Header isCart={false} />
       </View>
 
       <View style={styles.imageContainer}>
@@ -98,6 +89,11 @@ const ProductDetailsScreen = ({
           );
         })}
       </View>
+
+      {/* Add to Cart Section */}
+      <TouchableOpacity style={styles.button}>
+        <Text style={styles.buttonText}>Add to Cart</Text>
+      </TouchableOpacity>
     </LinearGradient>
   );
 };
@@ -174,5 +170,17 @@ const styles = StyleSheet.create({
     height: 28,
     width: 28,
     borderRadius: 20,
+  },
+  button: {
+    backgroundColor: '#e96e6e',
+    padding: 12,
+    marginVertical: 24,
+    alignItems: 'center',
+    borderRadius: 12,
+  },
+  buttonText: {
+    fontSize: 20,
+    fontWeight: '600',
+    color: '#ffffff',
   },
 });

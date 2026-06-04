@@ -1,15 +1,37 @@
-import { Image, StatusBar, StyleSheet, View } from 'react-native';
+import {
+  Image,
+  StatusBar,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import React from 'react';
+import Ionicons from '@react-native-vector-icons/ionicons';
+import { useNavigation } from '@react-navigation/native';
+import { NativeStackNavigationProp } from '@react-navigation/native-stack';
+import { RootStackParamList } from '../../App';
 
-const Header = () => {
+const Header = ({ isCart }: { isCart: boolean }) => {
+  const navigation =
+    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   return (
     <View style={styles.headerContainer}>
-      <View style={styles.appIconContainer}>
-        <Image
-          source={require('../assets/fashion_logo.png')}
-          style={styles.appIcon}
-        />
-      </View>
+      <TouchableOpacity
+        onPress={() => navigation.navigate('HOME')}
+        style={styles.appIconContainer}
+      >
+        {isCart ? (
+          <Ionicons name="chevron-back" size={24} color={'#e96e6e'} />
+        ) : (
+          <Image
+            source={require('../assets/fashion_logo.png')}
+            style={styles.appIcon}
+          />
+        )}
+      </TouchableOpacity>
+
+      {isCart && <Text style={styles.cartHeaderTitle}>My Cart</Text>}
       <Image source={require('../assets/user.jpg')} style={styles.dp} />
     </View>
   );
@@ -29,7 +51,7 @@ const styles = StyleSheet.create({
     height: 44,
     width: 44,
     backgroundColor: '#ffffff',
-    borderRadius: 22,
+    borderRadius: 28,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -41,5 +63,9 @@ const styles = StyleSheet.create({
     height: 44,
     width: 44,
     borderRadius: 22,
+  },
+  cartHeaderTitle: {
+    fontSize: 24,
+    fontWeight: '600',
   },
 });
