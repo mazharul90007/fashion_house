@@ -99,12 +99,12 @@ const styles = StyleSheet.create({
   },
   listContent: {
     paddingHorizontal: 16,
-    paddingTop: 10,
+    paddingTop: 4,
     paddingBottom: 30,
   },
   columnWrapper: {
-    justifyContent: 'space-between', // ✨ Pushes columns perfectly to opposite screen edges
-    marginBottom: 16, // Adds uniform vertical spacing between grid rows
+    justifyContent: 'space-between',
+    marginBottom: 16,
   },
   matchText: {
     color: '#000000',
