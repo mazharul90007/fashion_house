@@ -22,6 +22,7 @@ export type RootStackParamList = {
       trending: boolean;
     };
   };
+  CART: undefined;
 };
 
 const Tab = createBottomTabNavigator();

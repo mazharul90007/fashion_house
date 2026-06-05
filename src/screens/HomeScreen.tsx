@@ -34,7 +34,7 @@ const HomeScreen = () => {
   // Bundling top elements into a single safe layout track
   const renderHeader = () => (
     <View>
-      <Header />
+      <Header isCart={false}/>
 
       {/* Search input section */}
       <Text style={styles.matchText}>Match Your Style</Text>

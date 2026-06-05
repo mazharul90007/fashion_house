@@ -10,15 +10,19 @@ import React from 'react';
 import Ionicons from '@react-native-vector-icons/ionicons';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import { RootStackParamList } from '../../App';
 
 const Header = ({ isCart }: { isCart: boolean }) => {
-  const navigation =
-    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+  const navigation = useNavigation<NativeStackNavigationProp<any>>();
   return (
     <View style={styles.headerContainer}>
       <TouchableOpacity
-        onPress={() => navigation.navigate('HOME')}
+        onPress={() => {
+          if (isCart) {
+            navigation.navigate('HOME_STACK');
+          } else {
+            navigation.navigate('HOME');
+          }
+        }}
         style={styles.appIconContainer}
       >
         {isCart ? (
